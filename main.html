@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Precision Auto Works</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            color: #333;
+            line-height: 1.6;
+            background: #f5f5f5;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .top-bar {
+            background: #0a0a0a;
+            padding: 8px 0;
+            font-size: 13px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info a {
+            color: #d4a574;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #fff;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin-left: 15px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #d4a574;
+        }
+
+        nav {
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4a574;
+            letter-spacing: 2px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4a574;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background-image: url(images/download\ \(5\).jpg);
+            background-size: cover;
+            background-position: center;
+            padding: 150px 0 80px;
+            margin-top: 100px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #d4a574;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .booking-info {
+            padding: 20px;
+        }
+
+        .booking-info h2 {
+            font-size: 36px;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+        }
+
+        .booking-info p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #d4a574;
+        }
+
+        .info-box h3 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .info-box ul {
+            list-style: none;
+            color: #666;
+        }
+
+        .info-box ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .info-box ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #d4a574;
+            font-weight: bold;
+        }
+
+        /* Booking Form */
+        .booking-form {
+            background: #f9f9f9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .booking-form h3 {
+            font-size: 28px;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4a574;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #d4a574;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #b8875f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+        }
+
+        /* Why Choose Us Section */
+        .why-choose {
+            background: #1a1a1a;
+            padding: 80px 0;
+            color: #fff;
+        }
+
+        .why-choose h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #d4a574;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 30px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #d4a574;
+        }
+
+        .feature-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #d4a574;
+        }
+
+        .feature-item p {
+            color: #ccc;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            color: #d4a574;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4a574;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="contact-info">
+                <a href="tel:5551234567">📞 (555) 123-4567</a>
+                <a href="mailto:info@precisionautoworks.com">✉ info@precisionautoworks.com</a>
+                <a href="#">📍 456 Main Street, Brooklyn, NY 11201</a>
+            </div>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Yelp</a>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container nav-container">
+                <a href="mech.html" class="logo">PRECISION AUTO WORKS</a>
+                <ul class="nav-links">
+                    <li><a href="mech.html">Home</a></li>
+                   
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Book Your Appointment</h1>
+            <p>Schedule your service online - Quick, easy, and convenient</p>
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                
+                <div class="booking-info">
+                    <h2>Schedule Your Auto Service Today</h2>
+                    <p>Get your vehicle serviced by our expert technicians. We offer flexible scheduling to fit your busy life. Simply fill out the form and we'll confirm your appointment within 24 hours.</p>
+
+                    <div class="info-box">
+                        <h3>📅 Business Hours</h3>
+                        <ul>
+                            <li>Monday - Friday: 8:00 AM - 6:00 PM</li>
+                            <li>Saturday: 9:00 AM - 4:00 PM</li>
+                            <li>Sunday: Closed</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>⚡ What to Expect</h3>
+                        <ul>
+                            <li>Free diagnostic with service</li>
+                            <li>Detailed service estimate</li>
+                            <li>Complimentary shuttle service</li>
+                            <li>Same-day service available</li>
+                            <li>12-month warranty on all work</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>📞 Need Help?</h3>
+                        <ul>
+                            <li>Call us: 07035514427</li>
+                            <li>Email: info@precisionautoworks.com</li>
+                            <li>Text us for quick questions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+                <div class="booking-form">
+                    <div class="success-message" id="successMessage">
+                        ✓ Appointment request submitted successfully! We'll contact you within 24 hours.
+                    </div>
+
+                    <h3>Appointment Request Form</h3>
+                    <form id="bookingForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="07035514427" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicleMake">Vehicle Make *</label>
+                                <input type="text" id="vehicleMake" name="vehicleMake" placeholder="e.g., Toyota" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleModel">Vehicle Model *</label>
+                                <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g., Camry" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="vehicleYear">Year *</label>
+                                <input type="number" id="vehicleYear" name="vehicleYear" placeholder="2020" min="1950" max="2026" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="mileage">Mileage</label>
+                                <input type="number" id="mileage" name="mileage" placeholder="50000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceType">Service Type *</label>
+                            <select id="serviceType" name="serviceType" required>
+                                <option value="">Select a service...</option>
+                                <option value="oil-change">Oil Change</option>
+                                <option value="brake-service">Brake Service</option>
+                                <option value="engine-diagnostics">Engine Diagnostics</option>
+                                <option value="transmission">Transmission Service</option>
+                                <option value="tire-service">Tire Service</option>
+                                <option value="ac-service">Air Conditioning Service</option>
+                                <option value="general-maintenance">General Maintenance</option>
+                                <option value="inspection">State Inspection</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferredDate">Preferred Date *</label>
+                                <input type="date" id="preferredDate" name="preferredDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferredTime">Preferred Time *</label>
+                                <select id="preferredTime" name="preferredTime" required>
+                                    <option value="">Select time...</option>
+                                    <option value="8:00 AM">8:00 AM</option>
+                                    <option value="9:00 AM">9:00 AM</option>
+                                    <option value="10:00 AM">10:00 AM</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="12:00 PM">12:00 PM</option>
+                                    <option value="1:00 PM">1:00 PM</option>
+                                    <option value="2:00 PM">2:00 PM</option>
+                                    <option value="3:00 PM">3:00 PM</option>
+                                    <option value="4:00 PM">4:00 PM</option>
+                                    <option value="5:00 PM">5:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comments">Additional Comments / Describe the Issue</label>
+                            <textarea id="comments" name="comments" placeholder="Tell us more about what's happening with your vehicle..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Request Appointment</button>
+                        <p style="text-align: center; margin-top: 15px; color: #666; font-size: 13px;">
+                            * Required fields. We'll contact you to confirm your appointment.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <div class="container">
+            <h2>Why Choose Precision Auto Works?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Expert Technicians</h3>
+                    <p>Expert mechanics with years of experience servicing all makes and models.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <h3>Quality Guarantee</h3>
+                    <p>12-month warranty on all parts and labor. We stand behind our work.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💰</div>
+                    <h3>Honest Pricing</h3>
+                    <p>Transparent estimates with no hidden fees. You'll know the cost before we start.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚗</div>
+                    <h3>Shuttle Service</h3>
+                    <p>Free shuttle service within 10 miles. We'll get you where you need to go.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Fast Turnaround</h3>
+                    <p>Most services completed same-day. We value your time as much as you do.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>Latest Equipment</h3>
+                    <p>State-of-the-art diagnostic tools and equipment for accurate service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>                
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><a href="tel:5551234567">07035514427</a></li>
+                        <li><a href="mailto:info@precisionautoworks.com">info@precisionautoworks.com</a></li>
+                        <li><a href="#">precisionautoworks.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Location</h4>
+                    <ul>
+                        <li><a href="#">Nnamdi Azikiwe Airport Road</a></li>
+                        <li><a href="#">Abuja, FCT</a></li>
+                        <li style="margin-top: 15px;"><strong>Hours:</strong></li>
+                        <li>Mon-Fri: 8AM - 6PM</li>
+                        <li>Sat: 9AM - 4PM</li>
+                        <li>Sun: Closed</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© Copyright Precision Auto Works | All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+         
+
+
+        
+        const SUPABASE_URL = 'https://lpiuhbkewjjzttrsbveb.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxwaXVoYmtld2pqenR0cnNidmViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMzIxMjcsImV4cCI6MjA4NDkwODEyN30.KavoB25owrVg_ieK4lGwa-8d3GDxLAdHiss0P_eKoz8';
+
+        
+        var supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+         console.log("https://lpiuhbkewjjzttrsbveb.supabase.co:", SUPABASE_URL);
+        const dateInput = document.getElementById('preferredDate');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const successMessage = document.getElementById('successMessage');
+            
+            
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                
+                // Prepare data for Supabase (convert to snake_case)
+                const appointmentData = {
+                    first_name: formData.get('firstName'),
+                    last_name: formData.get('lastName'),
+                    phone: formData.get('phone'),
+                    email: formData.get('email'),
+                    vehicle_make: formData.get('vehicleMake'),
+                    vehicle_model: formData.get('vehicleModel'),
+                    vehicle_year: parseInt(formData.get('vehicleYear')),
+                    mileage: formData.get('mileage') ? parseInt(formData.get('mileage')) : null,
+                    service_type: formData.get('serviceType'),
+                    preferred_date: formData.get('preferredDate'),
+                    preferred_time: formData.get('preferredTime'),
+                    comments: formData.get('comments') || null,
+                    status: 'pending'
+                };
+
+                // Insert into Supabase
+                const { data, error } = await supabase
+                    .from('appointments')
+                    .insert([appointmentData])
+                    .select();
+
+                if (error) {
+                    throw error;
+                }
+
+                // Success!
+                console.log('Appointment created:', data);
+                
+                // Show success message
+                successMessage.style.background = '#4caf50';
+                successMessage.textContent = '✓ Appointment request submitted successfully! We\'ll contact you within 24 hours.';
+                successMessage.classList.add('show');
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Reset form
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+
+            } catch (error) {
+                console.error('Error submitting appointment:', error);
+                
+                // Show error message
+                successMessage.style.background = '#f44336';
+                successMessage.textContent = '❌ Error: ' + error.message + '. Please try again or call us at (555) 123-4567.';
+                successMessage.classList.add('show');
+                
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 7000);
+            } finally {
+                // Reset button
+                submitBtn.textContent = 'Request Appointment';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = '(' + value;
+                } else if (value.length <= 6) {
+                    value = '(' + value.slice(0, 3) + ') ' + value.slice(3);
+                } else {
+                    value = '(' + value.slice(0, 3) + ') ' + value.slice(3, 6) + '-' + value.slice(6, 10);
+                }
+            }
+            e.target.value = value;
+        });
+
+       
+       
+    </script>
+</body>
+</html>
